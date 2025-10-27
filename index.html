@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- Boxicons CSS -->
+
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <title>My-Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <img class="image-gradient" src="gradient.png" alt="gradient" />
+  <div class="layer-blur"></div>
+
+  <div class="container">
+    <header class="site-header">
+      <h1 class="logo">
+        MY-<span>PORTFOLIO</span>
+    </h1>
+
+      <!-- Hamburger toggle (visible on small screens) -->
+      <button
+        class="menu-toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Open navigation"
+      >
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar3"></span>
+      </button>
+
+      <!-- Navigation -->
+      <nav id="primary-nav" class="nav-links">
+        <a href="#">ABOUT ME</a>
+        <a href="#">PROJECTS</a>
+        <a href="#">CONTACT</a>
+      </nav>
+
+      <button class="btn-signing">SIGNING</button>
+    </header>
+        
+    <section class="home">
+
+         <div class="home-img">
+          <img src="IMRAN.png" alt="profile img" />      
+        </div>
+
+      <div class="home-content">
+        <h3>Hello, I'm</h3>
+        <h1>Imran Ayub Memon</h1>
+        <h3>And I'm a <span>Stack Developer</span></h3>
+        <p>
+          I am a passionate frontend developer with experience in creating
+          beautiful and functional web applications. I love to bring ideas to
+          life in the browser.
+        </p>
+      <div class="social-media">
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+        <a href="#"><i class="bx bxl-instagram"></i></a>
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+      </div>
+       
+    </section>
+  </div>
+
+
+
+
+  <script>
+    // Hamburger behaviour: toggle nav open/close
+    (function () {
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('primary-nav');
+      const focusableLinks = nav.querySelectorAll('a');
+
+      function setOpen(isOpen) {
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.classList.toggle('open', isOpen);
+        nav.classList.toggle('open', isOpen);
+        if (isOpen) {
+          toggle.setAttribute('aria-label', 'Close navigation');
+          // move focus to first nav link for keyboard users
+          if (focusableLinks.length) focusableLinks[0].focus();
+        } else {
+          toggle.setAttribute('aria-label', 'Open navigation');
+          toggle.focus();
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+
+      // Close menu when a link is clicked (mobile)
+      nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setOpen(false);
+      });
+
+      // close with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      // optionally close when clicking outside the nav (mobile)
+      document.addEventListener('click', (e) => {
+        if (!nav.classList.contains('open')) return;
+        const insideHeader = e.composedPath().includes(document.querySelector('.site-header'));
+        if (!insideHeader) setOpen(false);
+      });
+    })();
+  </script>
+</body>
+</html>
