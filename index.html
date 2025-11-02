@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My-Portfolio - Fixed</title>
 
-<!-- Boxicons CSS -->
+  <!-- Boxicons & AOS CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-
-  <title>My-Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <img class="image-gradient" src="gradient.png" alt="gradient" />
   <div class="layer-blur"></div>
 
   <div class="container">
     <header class="site-header">
-      <h1 class="logo">
-        MY-<span>PORTFOLIO</span>
-    </h1>
+      <h1 class="logo" data-aos="slide-right">MY-<span>PORTFOLIO</span></h1>
 
       <!-- Hamburger toggle (visible on small screens) -->
       <button
@@ -34,86 +33,109 @@
       </button>
 
       <!-- Navigation -->
-      <nav id="primary-nav" class="nav-links">
-        <a href="#">ABOUT ME</a>
-        <a href="#">PROJECTS</a>
-        <a href="#">CONTACT</a>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
+        <a href="#" data-aos="fade-down" data-aos-duration="1200">ABOUT ME</a>
+        <a href="#" data-aos="fade-down" data-aos-duration="1400">PROJECTS</a>
+        <a href="#" data-aos="fade-down" data-aos-duration="1600">CONTACT</a>
       </nav>
 
-      <button class="btn-signing">SIGNING</button>
+      <button class="btn-signing" data-aos="slide-left">SIGNING</button>
     </header>
         
     <section class="home">
+      <div class="home-img-wrapper">
 
-         <div class="home-img">
-          <img src="IMRAN.png" alt="profile img" />      
+        <!-- Original SVG blob #1 (IDs made unique) -->
+        <div class="liquid-shape">
+          <svg viewBox="0 0 500 500" width="100%" id="blobSvg1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgb(76, 161, 175)"></stop>
+                <stop offset="100%" stop-color="rgb(196, 224, 229)"></stop>
+              </linearGradient>
+            </defs>
+            <path fill="#12f7ff">
+              <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+
+                M421.5,308.5Q432,367,378,389Q324,411,272,434Q220,457,164.5,435Q109,413,80,360.5Q51,308,67.5,254.5Q84,201,104,153Q124,105,173.5,85Q223,65,288.5,44Q354,23,373,91Q392,159,401.5,204.5Q411,250,421.5,308.5Z;
+
+                M474,315Q452,380,402,426.5Q352,473,287,459.5Q222,446,176.5,417Q131,388,74,353Q17,318,27,252.5Q37,187,77,141.5Q117,96,168,66.5Q219,37,274.5,55.5Q330,74,358.5,118Q387,162,441.5,206Q496,250,474,315Z;
+
+                M435,293Q384,336,356.5,380Q329,424,276.5,427Q224,430,174.5,412Q125,394,79,354Q33,314,57,257Q81,200,101,150.5Q121,101,169.5,65.5Q218,30,265.5,71Q313,112,352,135.5Q391,159,438.5,204.5Q486,250,435,293Z;
+
+                M436.92662,298.77986Q401.72491,347.55973,368.83037,392.7157Q335.93584,437.87167,278.81195,441.64232Q221.68805,445.41297,176.81195,415.85324Q131.93584,386.29352,110.59658,341.66963Q89.25733,297.04574,60.46792,241.58703Q31.6785,186.12833,67.86212,133.93106Q104.04574,81.73379,160.25222,48.54574Q216.4587,15.35768,277.05973,36.70615Q337.66075,58.05461,376.27542,100.82082Q414.8901,143.58703,443.50921,196.79352Q472.12833,250,436.92662,298.77986Z;
+
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+              " />
+            </path>
+          </svg>
         </div>
+
+        <!-- Original SVG blob #2 (IDs made unique) -->
+        <div class="liquid-shape">
+          <svg viewBox="0 0 500 500" width="100%" id="blobSvg2" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgb(76, 161, 175)"></stop>
+                <stop offset="100%" stop-color="rgb(196, 224, 229)"></stop>
+              </linearGradient>
+            </defs>
+            <path fill="#12f7ff">
+              <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+
+                M421.5,308.5Q432,367,378,389Q324,411,272,434Q220,457,164.5,435Q109,413,80,360.5Q51,308,67.5,254.5Q84,201,104,153Q124,105,173.5,85Q223,65,288.5,44Q354,23,373,91Q392,159,401.5,204.5Q411,250,421.5,308.5Z;
+
+                M474,315Q452,380,402,426.5Q352,473,287,459.5Q222,446,176.5,417Q131,388,74,353Q17,318,27,252.5Q37,187,77,141.5Q117,96,168,66.5Q219,37,274.5,55.5Q330,74,358.5,118Q387,162,441.5,206Q496,250,474,315Z;
+
+                M435,293Q384,336,356.5,380Q329,424,276.5,427Q224,430,174.5,412Q125,394,79,354Q33,314,57,257Q81,200,101,150.5Q121,101,169.5,65.5Q218,30,265.5,71Q313,112,352,135.5Q391,159,438.5,204.5Q486,250,435,293Z;
+
+                M436.92662,298.77986Q401.72491,347.55973,368.83037,392.7157Q335.93584,437.87167,278.81195,441.64232Q221.68805,445.41297,176.81195,415.85324Q131.93584,386.29352,110.59658,341.66963Q89.25733,297.04574,60.46792,241.58703Q31.6785,186.12833,67.86212,133.93106Q104.04574,81.73379,160.25222,48.54574Q216.4587,15.35768,277.05973,36.70615Q337.66075,58.05461,376.27542,100.82082Q414.8901,143.58703,443.50921,196.79352Q472.12833,250,436.92662,298.77986Z;
+
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+              " />
+            </path>
+          </svg>
+        </div>
+
+        <div class="home-img">
+          <img src="IMRAN.png" alt="profile img" />
+        </div>
+      </div>
 
       <div class="home-content">
         <h3>Hello, I'm</h3>
-        <h1>Imran Ayub Memon</h1>
-        <h3>And I'm a <span>Stack Developer</span></h3>
+          <h1>Imran Ayub Memon</h1>
+        <div class="change-text" aria-live="polite">
+          <h3>And I'm a </h3>
+            <h3>
+              <span class="word">Full Stack Developer</span>
+              <span class="word">Youtuber</span>
+              <span class="word">Web Designer</span>
+              <span class="word">Frontend Developer</span>
+              <span class="word">UX/UI Developer</span>
+            </h3>
+        </div>
         <p>
-          I am a passionate frontend developer with experience in creating
+          I am a passionate Stack developer with experience in creating
           beautiful and functional web applications. I love to bring ideas to
           life in the browser.
         </p>
-      <div class="social-media">
-        <a href="#"><i class="bx bxl-facebook"></i></a>
-        <a href="#"><i class="bx bxl-instagram"></i></a>
-        <a href="#"><i class="bx bxl-linkedin"></i></a>
-        <a href="#"><i class="bx bxl-twitter"></i></a>
+        <div class="social-media">
+          <a href="#"><i class="bx bxl-facebook"></i></a>
+          <a href="#"><i class="bx bxl-instagram"></i></a>
+          <a href="#"><i class="bx bxl-linkedin"></i></a>
+          <a href="#"><i class="bx bxl-twitter"></i></a>
+        </div>
       </div>
-       
     </section>
   </div>
 
+  <!-- AOS JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-
-
-  <script>
-    // Hamburger behaviour: toggle nav open/close
-    (function () {
-      const toggle = document.querySelector('.menu-toggle');
-      const nav = document.getElementById('primary-nav');
-      const focusableLinks = nav.querySelectorAll('a');
-
-      function setOpen(isOpen) {
-        toggle.setAttribute('aria-expanded', String(isOpen));
-        toggle.classList.toggle('open', isOpen);
-        nav.classList.toggle('open', isOpen);
-        if (isOpen) {
-          toggle.setAttribute('aria-label', 'Close navigation');
-          // move focus to first nav link for keyboard users
-          if (focusableLinks.length) focusableLinks[0].focus();
-        } else {
-          toggle.setAttribute('aria-label', 'Open navigation');
-          toggle.focus();
-        }
-      }
-
-      toggle.addEventListener('click', () => {
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-        setOpen(!isOpen);
-      });
-
-      // Close menu when a link is clicked (mobile)
-      nav.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') setOpen(false);
-      });
-
-      // close with Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
-      });
-
-      // optionally close when clicking outside the nav (mobile)
-      document.addEventListener('click', (e) => {
-        if (!nav.classList.contains('open')) return;
-        const insideHeader = e.composedPath().includes(document.querySelector('.site-header'));
-        if (!insideHeader) setOpen(false);
-      });
-    })();
-  </script>
+  <!-- main JS -->
+  <script src="./script.js"></script>
 </body>
 </html>

@@ -1,21 +1,555 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Boxicons test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My-Portfolio - Fixed</title>
+
+  <!-- Boxicons & AOS CSS -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
   <style>
-    body { font-family: sans-serif; padding: 40px; }
-    .social-media { display:flex; gap:12px; }
-    .social-media a { font-size:28px; text-decoration:none; }
+    /* ---------- Basic ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #ffffff;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* background images */
+    .image-gradient {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* decorative blur layer */
+    .layer-blur {
+      height: 30rem;
+      width: 30rem;
+      position: absolute;
+      top: 20%;
+      right: 0;
+      box-shadow: 0 0 700px 15px rgba(255,255,255,0.06);
+      transform: rotate(-30deg);
+      z-index: -1;
+      pointer-events: none; /* allow clicks through */
+    }
+
+    /* header layout */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative; /* for absolutely positioned nav */
+      z-index: 30;
+    }
+
+    /* logo */
+    .logo {
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      color: #e7e7e7;
+    }
+
+    /* nav (mobile hidden until open) */
+    .nav-links {
+      display: none;
+      gap: 1rem;
+      position: absolute;
+      top: 64px;
+      left: 1rem;
+      right: 1rem;
+      background: #12f7ff;
+      border-radius: 10px;
+      padding: 0.75rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      flex-direction: column;
+      transition: transform 240ms ease, opacity 240ms ease;
+      transform-origin: top;
+      transform: scaleY(0.95);
+      opacity: 0;
+      z-index: 50;
+    }
+
+    /* ensure nav is visible above decorations when open */
+    .nav-links.open {
+      display: flex;
+      transform: scaleY(1);
+      opacity: 1;
+      z-index: 100;
+    }
+
+    /* nav links style */
+    .nav-links a {
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+    .nav-links a:focus,
+    .nav-links a:hover { background: rgba(0,0,0,0.2); outline: none; }
+
+    /* signing button */
+    .btn-signing {
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      border: none;
+      background:#12f7ff;
+      color: #070000;
+      font-weight: 700;
+    }
+    .btn-signing:hover{ background: #d95353; cursor: pointer; }
+
+    /* hamburger button */
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      z-index: 60;
+    }
+
+    /* bars */
+    .bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgb(224, 22, 22);
+      margin: 4px 0;
+      transition: transform 220ms ease, opacity 160ms ease;
+    }
+
+    /* animate when open: hamburger -> X */
+    .menu-toggle.open .bar1 { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle.open .bar2 { opacity: 0; transform: scaleX(0); }
+    .menu-toggle.open .bar3 { transform: translateY(-6px) rotate(-45deg); }
+
+    /* large screens: show horizontal nav, hide hamburger */
+    @media (min-width: 768px) {
+      .menu-toggle { display: none; }
+      .nav-links {
+        display: flex !important;
+        position: static;
+        transform: none;
+        opacity: 1;
+        background: transparent;
+        flex-direction: row;
+        gap: 1.25rem;
+        padding: 0;
+        box-shadow: none;
+      }
+      .btn-signing { margin-left: 2rem; }
+    }
+
+    /* HOME section layout */
+    .home {
+      position: relative;
+      width: 100%;
+      color: #d8bfbf;
+      min-height: 50vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding: 0%;
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+    }
+
+    /* image block (left on desktop) */
+    .home-img {
+      flex: 0 0 250px;
+      transform: rotate(-20deg); /* corrected */
+    }
+    .home-img img {
+      width: 90%;
+      height: auto;
+      display: block; /* corrected */
+      border-radius: 10px;
+      opacity: 0.9;
+    }
+
+    .home-img-wrapper {
+      position: relative;
+      width: 300px;
+    }
+
+    .liquid-shape {
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      top: 70%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      animation: pulseGlow 2s infinite;
+      pointer-events: none;
+    }
+
+    .liquid-shape:nth-child(2){
+      filter: blur(30px);
+    }
+
+    /* content block (right) */
+    .home-content {
+      flex: 1;
+      margin-left: 2rem;
+    }
+    .home-content h1 {
+      font-size: 3rem;
+      margin: 0.2rem 0;
+    }
+    .home-content h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-top: 0.25rem;
+    }
+    .home-content h3 span {
+      color:#12f7ff;
+    }
+    .home-content p {
+      margin-top: 1rem;
+      max-width: 600px;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+
+    /* social icons */
+    .social-media {
+      display: flex;
+      gap: 12px;
+      margin-top: 1.25rem;
+      align-items: center;
+    }
+    .social-media a {
+      display:inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 2px solid #12f7ff;
+      border-radius: 50%;
+      font-size: 20px;
+      color: #12f7ff;
+      text-decoration: none;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+    .social-media a:hover { transform: translateY(-4px); background: rgba(224,22,22,0.06); }
+
+    /* change-text / animated words (important) */
+    .change-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      position: relative; /* positioning context for absolute .word */
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      height: 2.2rem;
+      overflow: visible;
+    }
+
+    .change-text h3 {
+      display: inline-flex;
+      margin: 0;
+      vertical-align: top;
+    }
+
+    /* WORD stack: each .word sits on top of each other (absolute) */
+    .word {
+      position: absolute;
+      left: calc(7.5rem + 0px); /* adjusts so label "And I'm a" sits left — tune if needed */
+      top: 0;
+      opacity: 0;
+      display: inline-flex;
+      white-space: nowrap;
+      transform-origin: center top;
+      backface-visibility: hidden;
+      perspective: 800px;
+    }
+
+    /* letters */
+    .letter {
+      display:inline-block;
+      transform-origin: center center;
+      transform: rotateX(0deg);
+      transition: transform 360ms cubic-bezier(.2,.8,.2,1), opacity 360ms ease;
+      opacity: 0.95;
+      will-change: transform, opacity;
+    }
+    .letter.behind { transform: rotateX(-90deg); opacity: 0; }
+    .letter.in { transform: rotateX(0deg); opacity: 1; }
+    .letter.out { transform: rotateX(90deg); opacity: 0; }
+
+    /* responsive: stack on small screens */
+    @media (max-width: 767px) {
+      .home {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 1rem;
+      }
+      .home-img { order: 0; width: 220px; }
+      .home-content { order: 1; }
+      .home-img img { width: 220px; }
+      .liquid-shape { width: 350px ; }
+      .word { left: calc(6.5rem); }
+    }
+
+    /* small visual helper animation (not necessary) */
+    @keyframes pulseGlow {
+      0% { filter: blur(10px); opacity: .9; }
+      50% { filter: blur(20px); opacity: .8; }
+      100% { filter: blur(10px); opacity: .9; }
+    }
   </style>
 </head>
 <body>
-  <div class="social-media">
-    <a href="#"><i class="bx bxl-facebook"></i></a>
-    <a href="#"><i class="bx bxl-instagram"></i></a>
-    <a href="#"><i class="bx bxl-linkedin"></i></a>
-    <a href="#"><i class="bx bxl-twitter"></i></a>
+
+  <img class="image-gradient" src="gradient.png" alt="gradient" />
+  <div class="layer-blur"></div>
+
+  <div class="container">
+    <header class="site-header">
+      <h1 class="logo" data-aos="slide-right">MY-<span>PORTFOLIO</span></h1>
+
+      <!-- Hamburger toggle (visible on small screens) -->
+      <button
+        class="menu-toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Open navigation"
+      >
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar3"></span>
+      </button>
+
+      <!-- Navigation -->
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a href="#" data-aos="fade-down" data-aos-duration="1200">ABOUT ME</a>
+        <a href="#" data-aos="fade-down" data-aos-duration="1400">PROJECTS</a>
+        <a href="#" data-aos="fade-down" data-aos-duration="1600">CONTACT</a>
+      </nav>
+
+      <button class="btn-signing" data-aos="slide-left">SIGNING</button>
+    </header>
+
+    <section class="home">
+      <div class="home-img-wrapper">
+        <!-- Unique gradient id per SVG -->
+        <div class="liquid-shape">
+          <svg viewBox="0 0 500 500" width="100%" id="blobSvg1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgb(76, 161, 175)"></stop>
+                <stop offset="100%" stop-color="rgb(196, 224, 229)"></stop>
+              </linearGradient>
+            </defs>
+            <path fill="#12f7ff">
+              <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+
+                M421.5,308.5Q432,367,378,389Q324,411,272,434Q220,457,164.5,435Q109,413,80,360.5Q51,308,67.5,254.5Q84,201,104,153Q124,105,173.5,85Q223,65,288.5,44Q354,23,373,91Q392,159,401.5,204.5Q411,250,421.5,308.5Z;
+
+                M474,315Q452,380,402,426.5Q352,473,287,459.5Q222,446,176.5,417Q131,388,74,353Q17,318,27,252.5Q37,187,77,141.5Q117,96,168,66.5Q219,37,274.5,55.5Q330,74,358.5,118Q387,162,441.5,206Q496,250,474,315Z;
+
+                M435,293Q384,336,356.5,380Q329,424,276.5,427Q224,430,174.5,412Q125,394,79,354Q33,314,57,257Q81,200,101,150.5Q121,101,169.5,65.5Q218,30,265.5,71Q313,112,352,135.5Q391,159,438.5,204.5Q486,250,435,293Z;
+
+                M436.92662,298.77986Q401.72491,347.55973,368.83037,392.7157Q335.93584,437.87167,278.81195,441.64232Q221.68805,445.41297,176.81195,415.85324Q131.93584,386.29352,110.59658,341.66963Q89.25733,297.04574,60.46792,241.58703Q31.6785,186.12833,67.86212,133.93106Q104.04574,81.73379,160.25222,48.54574Q216.4587,15.35768,277.05973,36.70615Q337.66075,58.05461,376.27542,100.82082Q414.8901,143.58703,443.50921,196.79352Q472.12833,250,436.92662,298.77986Z;
+
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+              " />
+            </path>
+          </svg>
+        </div>
+
+        <div class="liquid-shape">
+          <svg viewBox="0 0 500 500" width="100%" id="blobSvg2" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgb(76, 161, 175)"></stop>
+                <stop offset="100%" stop-color="rgb(196, 224, 229)"></stop>
+              </linearGradient>
+            </defs>
+            <path fill="#12f7ff">
+              <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+
+                M421.5,308.5Q432,367,378,389Q324,411,272,434Q220,457,164.5,435Q109,413,80,360.5Q51,308,67.5,254.5Q84,201,104,153Q124,105,173.5,85Q223,65,288.5,44Q354,23,373,91Q392,159,401.5,204.5Q411,250,421.5,308.5Z;
+
+                M474,315Q452,380,402,426.5Q352,473,287,459.5Q222,446,176.5,417Q131,388,74,353Q17,318,27,252.5Q37,187,77,141.5Q117,96,168,66.5Q219,37,274.5,55.5Q330,74,358.5,118Q387,162,441.5,206Q496,250,474,315Z;
+
+                M435,293Q384,336,356.5,380Q329,424,276.5,427Q224,430,174.5,412Q125,394,79,354Q33,314,57,257Q81,200,101,150.5Q121,101,169.5,65.5Q218,30,265.5,71Q313,112,352,135.5Q391,159,438.5,204.5Q486,250,435,293Z;
+
+                M436.92662,298.77986Q401.72491,347.55973,368.83037,392.7157Q335.93584,437.87167,278.81195,441.64232Q221.68805,445.41297,176.81195,415.85324Q131.93584,386.29352,110.59658,341.66963Q89.25733,297.04574,60.46792,241.58703Q31.6785,186.12833,67.86212,133.93106Q104.04574,81.73379,160.25222,48.54574Q216.4587,15.35768,277.05973,36.70615Q337.66075,58.05461,376.27542,100.82082Q414.8901,143.58703,443.50921,196.79352Q472.12833,250,436.92662,298.77986Z;
+
+                M465,313.5Q448,377,389.5,401.5Q331,426,273,461Q215,496,155,462.5Q95,429,99.5,361Q104,293,99,248.5Q94,204,122,169Q150,134,184,81Q218,28,266,68.5Q314,109,384,114Q454,119,468,184.5Q482,250,465,313.5Z;
+              " />
+            </path>
+          </svg>
+        </div>
+
+        <div class="home-img">
+          <img src="IMRAN.png" alt="profile img" />
+        </div>
+      </div>
+
+      <div class="home-content">
+        <h3>Hello, I'm</h3>
+        <h1>Imran Ayub Memon</h1>
+
+        <div class="change-text" aria-live="polite">
+          <h3 class="label">And I'm a</h3>
+          <h3 class="word">Full Stack Developer</h3>
+          <h3 class="word">Youtuber</h3>
+          <h3 class="word">Web Designer</h3>
+          <h3 class="word">Frontend Developer</h3>
+          <h3 class="word">UX/UI Developer</h3>
+        </div>
+
+        <p>
+          I am a passionate Stack developer with experience in creating
+          beautiful and functional web applications. I love to bring ideas to
+          life in the browser.
+        </p>
+
+        <div class="social-media">
+          <a href="#"><i class="bx bxl-facebook"></i></a>
+          <a href="#"><i class="bx bxl-instagram"></i></a>
+          <a href="#"><i class="bx bxl-linkedin"></i></a>
+          <a href="#"><i class="bx bxl-twitter"></i></a>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+  // ---------- Combined JS: hamburger + animated words ----------
+  window.addEventListener('DOMContentLoaded', () => {
+    // AOS init
+    if (window.AOS) {
+      AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
+    }
+
+    // Hamburger behaviour
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('primary-nav');
+    const focusableLinks = nav.querySelectorAll('a');
+
+    function setOpen(isOpen) {
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.classList.toggle('open', isOpen);
+      nav.classList.toggle('open', isOpen);
+      if (isOpen) {
+        toggle.setAttribute('aria-label', 'Close navigation');
+        if (focusableLinks.length) focusableLinks[0].focus();
+      } else {
+        toggle.setAttribute('aria-label', 'Open navigation');
+        toggle.focus();
+      }
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+
+    nav.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!nav.classList.contains('open')) return;
+      const insideHeader = e.composedPath().includes(document.querySelector('.site-header'));
+      if (!insideHeader) setOpen(false);
+    });
+
+    // Animated rotating words
+    const words = document.querySelectorAll(".word");
+    if (words.length) {
+      words.forEach((word) => {
+        const letters = word.textContent.trim().split("");
+        word.textContent = "";
+        letters.forEach((ch) => {
+          const span = document.createElement("span");
+          span.textContent = ch;
+          span.className = "letter";
+          word.append(span);
+        });
+      });
+
+      let currentWordIndex = 0;
+      const maxWordIndex = words.length - 1;
+      words[currentWordIndex].style.opacity = "1";
+
+      function changeText() {
+        const currentWord = words[currentWordIndex];
+        const nextWordIndex = currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
+        const nextWord = words[nextWordIndex];
+
+        // animate current out (stagger)
+        Array.from(currentWord.children).forEach((letter, i) => {
+          setTimeout(() => {
+            letter.className = "letter out";
+          }, i * 80);
+        });
+
+        // prepare next word
+        nextWord.style.opacity = "1";
+        Array.from(nextWord.children).forEach((letter) => {
+          letter.className = "letter behind";
+        });
+        Array.from(nextWord.children).forEach((letter, i) => {
+          setTimeout(() => {
+            letter.className = "letter in";
+          }, 300 + i * 80);
+        });
+
+        // clear previous word after animation to avoid overlap
+        setTimeout(() => {
+          currentWord.style.opacity = "0";
+          Array.from(currentWord.children).forEach((letter) => {
+            letter.className = "letter";
+          });
+        }, 700 + currentWord.children.length * 80);
+
+        currentWordIndex = nextWordIndex;
+      }
+
+      // kick off
+      setTimeout(() => {
+        changeText();
+        setInterval(changeText, 4000);
+      }, 600);
+    }
+  });
+  </script>
+
 </body>
 </html>
