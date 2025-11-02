@@ -286,7 +286,7 @@ body {
   .home {
     flex-direction: column;
     text-align: center;
-    padding: 20px 1rem;
+    padding: 0px 1rem;
   }
   .home-img { order: 0; width: 220px; }
   .home-content {
@@ -308,7 +308,7 @@ body {
     line-height: 1;
   }
   .home-img img { width: 220px; }
-  .liquid-shape { width: 350px ; left: 50%; }
+  .liquid-shape { width: 350px ; left: 40%; }
 }
 
 /* small pulse animation for blobs */
