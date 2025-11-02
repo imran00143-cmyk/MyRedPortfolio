@@ -286,7 +286,7 @@ body {
   .home {
     flex-direction: column;
     text-align: center;
-    padding: 40px 1rem;
+    padding: 20px 1rem;
   }
   .home-img { order: 0; width: 220px; }
   .home-content {
@@ -304,8 +304,8 @@ body {
   }
 
   .home-content p {
-    font-size: 0.9rem;         /* smaller paragraph text */
-    line-height: 1.4;
+    font-size: 0.6rem;         /* smaller paragraph text */
+    line-height: 1;
   }
   .home-img img { width: 220px; }
   .liquid-shape { width: 350px ; left: 50%; }
